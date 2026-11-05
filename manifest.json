@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "schotime.group-tabs",
+  "name": "Group Tabs",
+  "version": "1.0.0",
+  "author": "schotime",
+  "license": "MIT",
+  "description": "Chrome-style tabs with app icons for Hyprland window groups, drawn over a transparent native groupbar",
+  "kinds": ["service"],
+  "keepLoaded": true,
+  "entryPoints": {
+    "service": "GroupTabs.qml"
+  }
+}
