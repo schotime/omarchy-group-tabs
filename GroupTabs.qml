@@ -111,7 +111,9 @@ Item {
       var client = data.clients[j]
       var members = client.grouped || []
       // One entry per group: build it from the tab that's on screen.
-      if (members.length < 2 || client.visible === false || client.hidden) continue
+      // A group left with one window is still a group (Hyprland keeps its
+      // strip, and new windows can join it), so it gets a single tab.
+      if (members.length < 1 || client.visible === false || client.hidden) continue
       var ws = client.workspace ? client.workspace.id : -1
       if (shown[ws] === undefined || fullscreenOn[ws]) continue
       var monitor = monitors[shown[ws]]
