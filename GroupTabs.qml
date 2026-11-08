@@ -61,7 +61,8 @@ Item {
   property int windowRounding: 12
   property real roundingPower: 2.0
 
-  // Every group currently on screen, keyed by its first member's address.
+  // Every group currently on screen, keyed by its lowest member address
+  // (stable while tabs are reordered).
   property var groups: ({})
   // Just the keys, reassigned only when the set of groups changes, so the
   // per-group windows aren't torn down and rebuilt on every refresh.
@@ -133,7 +134,10 @@ Item {
         })
       }
 
-      var key = members[0]
+      // Key by the lowest member address, not the first tab: reordering
+      // must keep the key stable, or the strip's window (and any drag in
+      // progress on it) is torn down and rebuilt mid-drag.
+      var key = members.slice().sort()[0]
       keys.push(key)
       next[key] = {
         monitor: String(monitor.name),
